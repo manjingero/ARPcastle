@@ -1,2 +1,2 @@
 # ARPcastle
-ARP poisoning tool with python 3 only.
+NMAP-based ARP poisoning tool with python 3 only.
