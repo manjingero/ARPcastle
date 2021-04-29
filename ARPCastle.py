@@ -18,20 +18,20 @@ def scanNetwork():
     try:
         nm = nmap.PortScanner()
     except nmap.PortScannerError:
-        print ("Nmap not found", sys.exc_info()[0])
+        print("Nmap not found", sys.exc_info()[0])
         sys.exit(1)
     except:
-        print ("Unexpected error:", sys.exc_info()[0])
+        print("Unexpected error:", sys.exc_info()[0])
         sys.exit(1)
 
     # initiate scan
     the_hosts = {}
     count = 0
+    print("Beginning scan")
     nm.scan("192.168.86.0/24", arguments="-sn -PR --random")  # flags
-    print ("Beginning scan")
     for h in nm.all_hosts():
         if "mac" in nm[h]["addresses"]:  # print mac address & vendor
-            print ()
+            print()
             count += 1
             host_number = str(count) + "."
             host_ip = nm[h]["addresses"]["ipv4"]
@@ -45,11 +45,11 @@ def scanNetwork():
                 host_name = "Unknown"
 
             try:
-                print (host_number, host_ip, "\t", host_name)
-                print ("  ", host_mac, "\t", host_vendor[host_mac])
+                print(host_number, host_ip, "\t", host_name)
+                print("  ", host_mac, "\t", host_vendor[host_mac])
             except:
-                print (host_number, host_ip, "\t", host_name)
-                print ("  ", host_mac)
+                print(host_number, host_ip, "\t", host_name)
+                print("  ", host_mac)
     print()
 
     user_choice = int(input("Type the number of the device you'd like to hack: "))
