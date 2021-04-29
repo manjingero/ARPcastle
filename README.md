@@ -1,5 +1,5 @@
 # ARPcastle
-NMAP-based ARP poisoning tool with Python 3 only.
+NMAP & Scapy based ARP poisoning tool with Python 3 only.
 
 # Usage notes
 * For Linux and Mac only
